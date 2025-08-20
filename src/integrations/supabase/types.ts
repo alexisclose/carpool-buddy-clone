@@ -79,6 +79,53 @@ export type Database = {
           },
         ]
       }
+      bookings: {
+        Row: {
+          booking_date: string
+          created_at: string
+          id: string
+          message: string | null
+          passenger_id: string
+          ride_id: string
+          seats_booked: number
+          status: string | null
+          total_price: number
+          updated_at: string
+        }
+        Insert: {
+          booking_date?: string
+          created_at?: string
+          id?: string
+          message?: string | null
+          passenger_id: string
+          ride_id: string
+          seats_booked: number
+          status?: string | null
+          total_price: number
+          updated_at?: string
+        }
+        Update: {
+          booking_date?: string
+          created_at?: string
+          id?: string
+          message?: string | null
+          passenger_id?: string
+          ride_id?: string
+          seats_booked?: number
+          status?: string | null
+          total_price?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_ride_id_fkey"
+            columns: ["ride_id"]
+            isOneToOne: false
+            referencedRelation: "rides"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       comments: {
         Row: {
           content: string
@@ -153,6 +200,92 @@ export type Database = {
         }
         Relationships: []
       }
+      messages: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          read_at: string | null
+          receiver_id: string
+          ride_id: string
+          sender_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          read_at?: string | null
+          receiver_id: string
+          ride_id: string
+          sender_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          read_at?: string | null
+          receiver_id?: string
+          ride_id?: string
+          sender_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messages_ride_id_fkey"
+            columns: ["ride_id"]
+            isOneToOne: false
+            referencedRelation: "rides"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          bio: string | null
+          birth_date: string | null
+          created_at: string
+          first_name: string | null
+          id: string
+          last_name: string | null
+          phone: string | null
+          profile_image_url: string | null
+          rating: number | null
+          total_trips: number | null
+          updated_at: string
+          user_id: string
+          verification_status: string | null
+        }
+        Insert: {
+          bio?: string | null
+          birth_date?: string | null
+          created_at?: string
+          first_name?: string | null
+          id?: string
+          last_name?: string | null
+          phone?: string | null
+          profile_image_url?: string | null
+          rating?: number | null
+          total_trips?: number | null
+          updated_at?: string
+          user_id: string
+          verification_status?: string | null
+        }
+        Update: {
+          bio?: string | null
+          birth_date?: string | null
+          created_at?: string
+          first_name?: string | null
+          id?: string
+          last_name?: string | null
+          phone?: string | null
+          profile_image_url?: string | null
+          rating?: number | null
+          total_trips?: number | null
+          updated_at?: string
+          user_id?: string
+          verification_status?: string | null
+        }
+        Relationships: []
+      }
       reviews: {
         Row: {
           content: string | null
@@ -180,6 +313,78 @@ export type Database = {
           updated_at?: string
           user_id?: string
           whisky_id?: string
+        }
+        Relationships: []
+      }
+      rides: {
+        Row: {
+          arrival_address: string | null
+          arrival_city: string
+          available_seats: number
+          car_color: string | null
+          car_model: string | null
+          created_at: string
+          departure_address: string | null
+          departure_city: string
+          departure_date: string
+          departure_time: string
+          description: string | null
+          driver_id: string
+          id: string
+          instant_booking: boolean | null
+          max_two_back: boolean | null
+          pets_allowed: boolean | null
+          price_per_seat: number
+          smoking_allowed: boolean | null
+          status: string | null
+          total_seats: number
+          updated_at: string
+        }
+        Insert: {
+          arrival_address?: string | null
+          arrival_city: string
+          available_seats: number
+          car_color?: string | null
+          car_model?: string | null
+          created_at?: string
+          departure_address?: string | null
+          departure_city: string
+          departure_date: string
+          departure_time: string
+          description?: string | null
+          driver_id: string
+          id?: string
+          instant_booking?: boolean | null
+          max_two_back?: boolean | null
+          pets_allowed?: boolean | null
+          price_per_seat: number
+          smoking_allowed?: boolean | null
+          status?: string | null
+          total_seats: number
+          updated_at?: string
+        }
+        Update: {
+          arrival_address?: string | null
+          arrival_city?: string
+          available_seats?: number
+          car_color?: string | null
+          car_model?: string | null
+          created_at?: string
+          departure_address?: string | null
+          departure_city?: string
+          departure_date?: string
+          departure_time?: string
+          description?: string | null
+          driver_id?: string
+          id?: string
+          instant_booking?: boolean | null
+          max_two_back?: boolean | null
+          pets_allowed?: boolean | null
+          price_per_seat?: number
+          smoking_allowed?: boolean | null
+          status?: string | null
+          total_seats?: number
+          updated_at?: string
         }
         Relationships: []
       }
@@ -317,6 +522,44 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      user_reviews: {
+        Row: {
+          created_at: string
+          id: string
+          rating: number
+          review_text: string | null
+          reviewed_id: string
+          reviewer_id: string
+          ride_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          rating: number
+          review_text?: string | null
+          reviewed_id: string
+          reviewer_id: string
+          ride_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          rating?: number
+          review_text?: string | null
+          reviewed_id?: string
+          reviewer_id?: string
+          ride_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_reviews_ride_id_fkey"
+            columns: ["ride_id"]
+            isOneToOne: false
+            referencedRelation: "rides"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_roles: {
         Row: {
