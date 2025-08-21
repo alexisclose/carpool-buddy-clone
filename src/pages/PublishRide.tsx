@@ -102,8 +102,6 @@ const PublishRide = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header user={user} onAuthClick={() => navigate('/auth')} />
-      
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="mb-6">
           <Button 

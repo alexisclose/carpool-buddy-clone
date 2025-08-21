@@ -79,9 +79,7 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header user={user} onAuthClick={handleAuthClick} />
-      
+    <div className="min-h-screen bg-background">      
       {/* Hero Section */}
       <section 
         className="relative py-24 px-4 bg-cover bg-center bg-no-repeat"
