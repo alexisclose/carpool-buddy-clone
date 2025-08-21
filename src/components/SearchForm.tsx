@@ -8,6 +8,7 @@ import { format } from "date-fns";
 interface SearchFormProps {
   onSearch: (params: SearchParams) => void;
   variant?: "hero" | "compact";
+  initialValues?: SearchParams;
 }
 
 interface SearchParams {
@@ -17,12 +18,12 @@ interface SearchParams {
   passengers: number;
 }
 
-export const SearchForm = ({ onSearch, variant = "hero" }: SearchFormProps) => {
+export const SearchForm = ({ onSearch, variant = "hero", initialValues }: SearchFormProps) => {
   const [searchParams, setSearchParams] = useState<SearchParams>({
-    from: "",
-    to: "",
-    date: format(new Date(), "yyyy-MM-dd"),
-    passengers: 1,
+    from: initialValues?.from || "",
+    to: initialValues?.to || "",
+    date: initialValues?.date || format(new Date(), "yyyy-MM-dd"),
+    passengers: initialValues?.passengers || 1,
   });
 
   const handleSubmit = (e: React.FormEvent) => {
